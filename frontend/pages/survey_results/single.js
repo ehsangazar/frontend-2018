@@ -1,0 +1,1 @@
+export default () => <div>Single View</div>
