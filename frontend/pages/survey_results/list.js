@@ -1,1 +1,2 @@
-export default () => <div>List View</div>
+export default () => <div>List View</div>;
+
