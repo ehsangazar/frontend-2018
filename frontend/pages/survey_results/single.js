@@ -1,1 +1,1 @@
-export default () => <div>Single View</div>
+export default () => <div>Survey Single Page</div>
