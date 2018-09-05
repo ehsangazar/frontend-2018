@@ -3,7 +3,10 @@ import Link from 'next/link'
 import Error from 'next/error';
 import Survey from '../../models/Survey';
 import { 
-  UL
+  UL,
+  LI,
+  A,
+  H1
 } from '../../components'
 
 export default class Page extends React.Component {
@@ -24,21 +27,26 @@ export default class Page extends React.Component {
       return <Error statusCode={this.props.statusCode} />;
     }
     return (
-      <UL>
-        { data && data.survey_results &&
-          data.survey_results.map((surveyItem, index) => 
-            (
-              <li key={`surveyItem-${index}`}>
-                <Link href={surveyItem.url}>
-                  <a>
-                    {surveyItem.name}
-                  </a>
-                </Link>
-              </li>
+      <div>
+        <H1>
+          Survey List
+        </H1>
+        <UL>
+          { data && data.survey_results &&
+            data.survey_results.map((surveyItem, index) => 
+              (
+                <LI key={`surveyItem-${index}`}>
+                  <Link href={surveyItem.url}>
+                    <A>
+                      {surveyItem.name}
+                    </A>
+                  </Link>
+                </LI>
+              )
             )
-          )
-        }
-      </UL>
+          }
+        </UL>
+      </div>
     );
   }
 }
