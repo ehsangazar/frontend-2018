@@ -27,7 +27,7 @@ class A extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      loading: false,
+      loading: false
     }
   }
   _handleOnClick = (event) => {
@@ -48,11 +48,6 @@ class A extends React.Component {
         loading: true
       }, () => {
         Router.push(route.page, href)
-        .then(() => {
-          this.setState({
-            loading: false
-          })
-        })
       })
     }
   }

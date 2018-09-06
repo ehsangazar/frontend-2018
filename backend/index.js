@@ -19,7 +19,7 @@ app.get('/api/survey_results', (req, res) => {
     res.status(200);
     setTimeout(() => {
       res.end(data);
-    }, 5000);
+    }, 500);
   });
 });
 
@@ -37,7 +37,7 @@ app.get('/api/survey_results/:fileId', (req, res) => {
     setTimeout(() => {
       res.status(200);
       res.end(data);
-    }, 20000);
+    }, 2000);
   });
 });
 
