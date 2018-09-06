@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link'  
 import Error from 'next/error';
 import Survey from '../../models/Survey';
 import { 
@@ -17,7 +16,6 @@ export default class Page extends React.Component {
   static async getInitialProps({ req, asPath }) {
     const SurveyModel = new Survey();
     const res = await SurveyModel.getItem(asPath.replace('/survey_results/',''));
-
     return {
       statusCode: res.statusCode,
       data: res.json,
@@ -30,14 +28,12 @@ export default class Page extends React.Component {
     if (statusCode !== 200) {
       return <Error statusCode={this.props.statusCode} />;
     }
-
+    
     return (
       <div>
-        <Link href={'/'}>
-          <A>
-            {`<`} Go back
-          </A>
-        </Link>
+        <A href={'/'}>
+          {`<`} Go back
+        </A>
         <H1>
           Survey Single
         </H1>
@@ -71,15 +67,15 @@ export default class Page extends React.Component {
               Themes
             </H3>
             <UL>
-              {data.themes && data.themes.map((theme) => 
-                <LI>
+              {data.themes && data.themes.map((theme,indexTheme) => 
+                <LI key={`theme-${indexTheme}`}>
                   {theme.name}
                   <H4>
                     Questions:
                   </H4>
                   <UL>
-                    {theme.questions && theme.questions.map((question) => 
-                      <LI>
+                    {theme.questions && theme.questions.map((question,indexQuestion) => 
+                      <LI key={`question-${indexQuestion}`}>
                         {question.description}
                         <br />
                         Average Rate: {question.average_rate}

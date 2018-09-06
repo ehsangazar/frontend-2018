@@ -17,7 +17,9 @@ app.get('/api/survey_results', (req, res) => {
   // Found Scenario
   fs.readFile(`${__dirname}/data/index.json`, 'utf8', (err, data) => {
     res.status(200);
-    res.end(data);
+    setTimeout(() => {
+      res.end(data);
+    }, 5000);
   });
 });
 
@@ -32,8 +34,10 @@ app.get('/api/survey_results/:fileId', (req, res) => {
 
   // Found Scneario
   fs.readFile(pathName, 'utf8', (err, data) => {
-    res.status(200);
-    res.end(data);
+    setTimeout(() => {
+      res.status(200);
+      res.end(data);
+    }, 20000);
   });
 });
 

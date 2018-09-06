@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link'  
 import Error from 'next/error';
 import Survey from '../../models/Survey';
 import { 
@@ -38,11 +37,9 @@ export default class Page extends React.Component {
               (
                 <LI key={`surveyItem-${index}`}>
                   <div>
-                    <Link href={surveyItem.url}>
-                      <A>
-                        {surveyItem.name}
-                      </A>
-                    </Link>
+                    <A href={surveyItem.url}>
+                      {surveyItem.name}
+                    </A>
                     <UL>
                       <LI>
                         name: {surveyItem.name}

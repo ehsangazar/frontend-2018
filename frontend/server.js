@@ -19,6 +19,9 @@ const app = next({
   dev
 })
 
+const getRoutes = require('./routes');
+const routes = getRoutes();
+
 const handle = app.getRequestHandler()
 
 let server
@@ -34,18 +37,26 @@ app
         server.use(proxyMiddleware(context, devProxy[context]))
       })
     }
+    
+    server.get('*', (req, res) => {
+      const parsedUrl = parse(req.url, true);
+      const { pathname, query = {} } = parsedUrl;
 
-    server.all('*', (req, res) => {
-      const parsedUrl = parse(req.url, true)
-      const { pathname, query } = parsedUrl
-      if ( pathname === '/'){
-        app.render(req, res, '/survey_results/list', query);
-      } else if (pathname.includes('/survey_results/')) {
-        app.render(req, res, '/survey_results/single', query);
-      } else {
-        handle(req, res, parsedUrl);
+      let route = null
+
+      routes.forEach(item => {
+        if (route === null){
+          if (pathname.match(item.regex) ) {
+            route = item
+          }
+        }
+      })
+
+      if (route) {
+        return app.render(req, res, route.page, query);
       }
-    })
+      return handle(req, res);
+    });
 
     server.listen(port, err => {
       if (err) {

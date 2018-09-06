@@ -1,13 +1,12 @@
-import fetch from 'isomorphic-unfetch';
+import 'isomorphic-unfetch';
 
 class Survey {
   constructor() {
-    this.fetch = fetch;
     this.baseUrl = `${process.env.ORIGIN}:${process.env.PORT}`
   }
 
   async getList() {
-    const res = await this.fetch(`${this.baseUrl}/api/survey_results`);
+    const res = await fetch(`${this.baseUrl}/api/survey_results`);
     let json = {}
 
     if (res.status === 200) json = await res.json();
@@ -20,7 +19,7 @@ class Survey {
   }
 
   async getItem(surveyId) {
-    const res = await this.fetch(`${this.baseUrl}/api/survey_results/${surveyId}`);
+    const res = await fetch(`${this.baseUrl}/api/survey_results/${surveyId}`);
     let json = {}
     
     if (res.status === 200) json = await res.json();

@@ -2,3 +2,5 @@ node_modules
 .next
 .env
 __snapshots__
+.map
+out
