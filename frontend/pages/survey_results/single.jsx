@@ -3,7 +3,14 @@ import Link from 'next/link'
 import Error from 'next/error';
 import Survey from '../../models/Survey';
 import { 
-  H1
+  H1,
+  H2,
+  H3,
+  H4,
+  UL,
+  LI,
+  A,
+  Space
 } from '../../components'
 
 export default class Page extends React.Component {
@@ -23,11 +30,68 @@ export default class Page extends React.Component {
     if (statusCode !== 200) {
       return <Error statusCode={this.props.statusCode} />;
     }
+
     return (
       <div>
+        <Link href={'/'}>
+          <A>
+            {`<`} Go back
+          </A>
+        </Link>
         <H1>
-          Survey Single: {data.survey_result_detail.name}
+          Survey Single
         </H1>
+        {data &&
+          <div>
+            <H2>
+              {data.name}
+            </H2>
+            <UL>
+              <LI>
+                name: {data.name}
+              </LI>
+              <LI>                      
+                url: {data.url}
+              </LI>
+              <LI>
+                participant_count: {data.participant_count}
+              </LI>
+              <LI>
+                participant_count_percentage: {data.participant_count_percentage}%
+              </LI>
+              <LI>
+                response_rate: {data.response_rate}
+              </LI>
+              <LI>
+                submitted_response_count: {data.submitted_response_count}
+              </LI>              
+            </UL>
+            <Space />
+            <H3>
+              Themes
+            </H3>
+            <UL>
+              {data.themes && data.themes.map((theme) => 
+                <LI>
+                  {theme.name}
+                  <H4>
+                    Questions:
+                  </H4>
+                  <UL>
+                    {theme.questions && theme.questions.map((question) => 
+                      <LI>
+                        {question.description}
+                        <br />
+                        Average Rate: {question.average_rate}
+                        <Space />
+                      </LI>
+                    )}
+                  </UL>
+                </LI>
+              )}
+            </UL>
+          </div>
+        }
       </div>
     );
   }

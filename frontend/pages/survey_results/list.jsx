@@ -33,8 +33,8 @@ export default class Page extends React.Component {
           Survey List
         </H1>
         <UL>
-          { data && data.survey_results &&
-            data.survey_results.map((surveyItem, index) => 
+          { data &&
+            data.map((surveyItem, index) => 
               (
                 <LI key={`surveyItem-${index}`}>
                   <div>
