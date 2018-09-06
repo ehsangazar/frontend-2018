@@ -6,7 +6,8 @@ import {
   UL,
   LI,
   A,
-  H1
+  H1,
+  Space
 } from '../../components'
 
 export default class Page extends React.Component {
@@ -36,11 +37,31 @@ export default class Page extends React.Component {
             data.survey_results.map((surveyItem, index) => 
               (
                 <LI key={`surveyItem-${index}`}>
-                  <Link href={surveyItem.url}>
-                    <A>
-                      {surveyItem.name}
-                    </A>
-                  </Link>
+                  <div>
+                    <Link href={surveyItem.url}>
+                      <A>
+                        {surveyItem.name}
+                      </A>
+                    </Link>
+                    <UL>
+                      <LI>
+                        name: {surveyItem.name}
+                      </LI>
+                      <LI>                      
+                        url: {surveyItem.url}
+                      </LI>
+                      <LI>
+                        participant_count: {surveyItem.participant_count}
+                      </LI>
+                      <LI>
+                        response_rate: {surveyItem.response_rate}
+                      </LI>
+                      <LI>
+                        submitted_response_count: {surveyItem.submitted_response_count}
+                      </LI>
+                    </UL>
+                    <Space />
+                  </div>
                 </LI>
               )
             )
