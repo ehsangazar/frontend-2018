@@ -33,3 +33,8 @@ npm run start
 
 ### OPEN Browser:
 http://localhost:5000
+
+
+
+### Deployment and Docker
+Dockerfile has been added to both frontend and backend for future deployments
