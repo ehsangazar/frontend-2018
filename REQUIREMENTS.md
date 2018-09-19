@@ -1,4 +1,4 @@
-# Culture Amp’s Front End Developer Coding Test
+# Front End 2018
 
 This repository contains a small number of static JSON files, which represent the responses from an HTTP API that offers access to a database of survey results.
 

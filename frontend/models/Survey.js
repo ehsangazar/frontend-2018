@@ -31,19 +31,29 @@ class Survey {
     // calculating percentages
     json.participant_count_percentage = (json.response_rate * 100).toFixed(2)
 
-    // calculating average rating for each quesiton
-    // - Responses with an empty rating should be considered non-responses
+    // For on each themes and each questions and survey responses
     if (json.themes){
       json.themes.forEach(theme => {
         if (theme.questions) {
           theme.questions.forEach(question => {
+            
             if (question.survey_responses){
               let countAcceptedResponses = 0
               let sumOfResponses = 0
+              let countOfRatings = [0,0,0,0,0]
+              let countOfEmptyRates = 0
+              // calculating average rating for each quesiton
+              // calculate counts of each rate
+              // - Responses with an empty rating should be considered non-responses
+
               question.survey_responses.forEach(response => {
                 if (response.response_content != "") {
                   countAcceptedResponses += 1
                   sumOfResponses += Number(response.response_content)
+
+                  countOfRatings[Number(response.response_content)-1] += 1
+                }else {
+                  countOfEmptyRates += 1
                 }
               })
               if (countAcceptedResponses !== 0){
@@ -51,6 +61,9 @@ class Survey {
               } else {
                 question.average_rate = 0
               }
+
+              question.count_of_ratings = countOfRatings
+              question.count_of_empty_ratings = countOfEmptyRates
             }
           })          
         }

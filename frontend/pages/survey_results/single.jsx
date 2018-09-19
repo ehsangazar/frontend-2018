@@ -25,6 +25,8 @@ export default class Page extends React.Component {
   render() {
     const { statusCode, data } = this.props
 
+    console.log('data',data)
+
     if (statusCode !== 200) {
       return <Error statusCode={this.props.statusCode} />;
     }
